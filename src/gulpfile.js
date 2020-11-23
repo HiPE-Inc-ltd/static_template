@@ -52,7 +52,7 @@ const SRC_JS_PATH = path.resolve(SRC_ROOT_PATH, 'js/**/*.js');
 const SRC_SCSS_PATH = path.resolve(SRC_ROOT_PATH, 'scss/**/*.scss');
 const SRC_IMG_PATH = path.resolve(SRC_ROOT_PATH, "image/**/*");
 // DESTINATION PATH
-const DEST_ROOT_PATH = "../public/release";
+const DEST_ROOT_PATH = "../release";
 const DEST_SCSS_PATH = path.resolve(DEST_ROOT_PATH, 'minified');
 const DEST_JS_PATH = path.resolve(DEST_ROOT_PATH, 'uglified');
 const DEST_IMG_PATH = path.resolve(DEST_ROOT_PATH, 'tinified');
