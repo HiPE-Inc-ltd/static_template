@@ -86,7 +86,8 @@ function minify_scss() {
         .pipe(size({
             showFiles: true
         }))
-        .pipe(dest(DEST_SCSS_PATH));
+        .pipe(dest(DEST_SCSS_PATH))
+        .pipe(browserSync.stream());
 }
 
 function minify_css() {
@@ -105,7 +106,8 @@ function minify_js() {
         .pipe(size({
             showFiles: true
         }))
-        .pipe(dest(DEST_JS_PATH));
+        .pipe(dest(DEST_JS_PATH))
+        .pipe(browserSync.stream());
 }
 
 function minify_image() {
@@ -122,19 +124,21 @@ function minify_image() {
         .pipe(size({
             showFiles: true
         }))
-        .pipe(dest(DEST_IMG_PATH));
+        .pipe(dest(DEST_IMG_PATH))
+        .pipe(browserSync.stream());
 }
 
 function broswer_watch() {
     browserSync.init({
         server: {
-            baseDir: './'
+            baseDir: '../'
         }
     });
 
-    watch(SRC_SCSS_PATH, minify_scss);
-    watch('./*.html').on('change', browserSync.reload);
-    watch(SRC_JS_PATH).on('change', browserSync.reload);
+    watch(WATCH_SCSS_PATH, minify_scss);
+    watch(WATCH_JS_PATH, minify_js);
+    watch('../*.html').on('change', browserSync.reload);
+
 }
 
 function compile() {
@@ -151,3 +155,5 @@ exports.build = series(minify_scss, minify_js, minify_image);
 exports.rebuild = series(clean_files, series(parallel(minify_scss, minify_js), minify_image));
 // COMPILE AND WATCH CHANGES FOR SCSS JS IMG
 exports.watch = compile;
+// COMPILE, WATCH AND SYNC CHANGES FOR SCSS JS IMG
+exports.sync = broswer_watch;
