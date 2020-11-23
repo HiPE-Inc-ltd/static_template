@@ -1,0 +1,70 @@
+@charset "UTF-8";
+/*
+    include variables amd function
+*/
+@import "../core/mixins/*";
+@import "../core/root/_variables";
+.page {
+    &__top {
+        height: 50vh !important;
+    }
+}
+
+.page {
+    .contact {
+        padding: 90px 0;
+
+        &__upper {
+            @include is-tabpc {
+                margin-bottom: 40px;
+            }
+        }
+
+        &__below {
+            @include is-tabpc {
+                padding: 0 90px;
+            }
+
+        }
+    }
+
+    .float {
+        position: absolute;
+        right: -210px;
+        top: -2px;
+        font-size: 0.75rem;
+        width: 200px;
+
+        @include is-sp {
+            position: static;
+        }
+    }
+
+    .error {
+        color: red;
+    }
+
+    .alert {
+        padding: 2rem 1rem;
+
+        &-danger {
+            border-left: 3px solid red;
+            background-color: #fff6f7;
+        }
+
+        &-success {
+            border-left: 3px solid #00c851;
+            background-color: #f4fff6;
+        }
+    }
+
+    .ttl {
+        margin-bottom: 0;
+        font-size: 1.5rem;
+        font-weight: 400;
+    }
+
+    .btn{
+        width: 100%;
+    }
+}

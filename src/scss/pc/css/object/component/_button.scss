@@ -1,0 +1,139 @@
+.c-button {
+    font-weight: 700;
+    @include font-line(16);
+    text-decoration: none;
+    position: relative;
+    cursor: pointer;
+    color: white;
+    border-radius: 50px;
+    transition: all ease-in-out 0.3s;
+
+    &--main {
+        background-color: $color-primary;
+
+        &:hover {
+            background-color: white;
+            color: $color-primary;
+        }
+
+        &--b {
+            &:hover {
+                background-color: $color-text-default;
+                color: $color-primary;
+            }
+        }
+    }
+
+    &--l {
+        padding-top: 15px;
+        padding-right: 40px;
+        padding-bottom: 15px;
+        padding-left: 40px;
+    }
+
+    &--md {
+        padding: 10px 35px;
+    }
+
+    &--box {
+        border-radius: 0;
+    }
+
+
+
+    &--nobullet {
+        padding: 0;
+        &:after {
+            display: none;
+        }
+    }
+
+    &--return {
+
+        &:after {
+            transition: all ease-in-out 0.3s;
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto 0;
+            transform: rotate(45deg);
+            border-bottom: 3px solid #fff;
+            border-left: 3px solid #fff;
+            width: 9px;
+            height: 9px;
+            left: 18px;
+
+            @include is-sp {
+                left: 16px;
+            }
+        }
+
+        &:hover {
+            &:after {
+                border-bottom-color: $color-primary;
+                border-left-color: $color-primary;
+            }
+        }
+    }
+
+    &--forward {
+        &:after {
+            transition: all ease-in-out 0.3s;
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto 0;
+            transform: rotate(45deg);
+            border-top: 3px solid #fff;
+            border-right: 3px solid #fff;
+            width: 9px;
+            height: 9px;
+            right: 18px;
+
+            @include is-sp {
+                right: 16px;
+            }
+        }
+
+        &:hover {
+            &:after {
+                border-top-color: $color-primary;
+                border-right-color: $color-primary;
+            }
+        }
+    }
+
+    &--notooltip{
+        &:before{
+            content: "" !important;
+        }
+        &:after{
+            content: "" !important;
+        }
+    }
+    &--disabled{
+        background-color:rgba(0,0,0,0.6);
+        position: relative;
+        pointer-events: none;
+        &:before{
+            content:  attr(data-tooltip) !important;
+            position: absolute;
+            color: rgb(255, 121, 121);
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            @include is-pc{
+                @include font-line(15,15);
+            }
+            @include is-sp{
+                @include font-line(14,14);
+            }
+        }
+    }
+}
+
+[data-tooltip]:before{
+    content: attr(data-tooltip);
+}

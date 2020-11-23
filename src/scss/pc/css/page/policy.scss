@@ -1,0 +1,27 @@
+.page {
+    &__top {
+        height: 50vh !important;
+    }
+}
+
+.policy {
+    padding: 90px 0;
+
+    &__inner {}
+
+    p {
+        margin-bottom: 1.75em;
+    }
+
+    ol,
+    ul {
+        margin: 0 0 1.5em 3em;
+    }
+
+    ol,
+    ul,
+    li {
+        list-style-type: decimal;
+    }
+
+}

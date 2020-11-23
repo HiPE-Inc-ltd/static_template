@@ -1,0 +1,63 @@
+ /*
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ VARIABLE FOR MIXINS _media.scss
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
+
+ $base-size: 5;
+ $body-min-width: 1024px; //画面幅の最小値 ない場合はinitial
+ $wrap-width: 1000px; //wrapの幅 ない場合はauto
+ $wrap-max-width: initial; //最大幅 ない場合はinitial
+ $wrap-wp-margin: auto; //SP画面wrapの横余白 ない場合はauto
+
+ $breakpoint-sp: 750px; //SP画面へのBP ない場合は0
+ $breakpoint-tab: 750px; //ipadminiへのBP
+ $breakpoint-pc: 0; //PC画面へのBP ない場合は0
+ $wrap-wp-margin: auto; //SP画面wrapの横余白 ない場合はauto
+
+ $gutter-pc: 20px; // PC画面のガッター
+ $gutter-sp: 10px; // SP画面のガッター
+
+ $content-top-pc: 60px;
+ $content-btm-pc: 60px;
+ $content-top-sp: 30px;
+ $content-btm-sp: 30px;
+
+ /*
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ VARIABLE FOR MIXINS _font-line.scss
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
+ $font-family-base: 'Noto Sans JP',
+ sans-serif;
+ $font-family-main: 'Montserrat',
+ sans-serif;
+ $font-family-en: 'Roboto',
+ sans-serif;
+ $font-size-base: 16;
+ $font-weight-base: 500;
+ $line-height-base: 1.75;
+
+ // ---------------------------------------------------------------
+ //  Line-hieght
+ // ---------------------------------------------------------------
+ $line-height-base: 1.75;
+
+ //validation
+ $color-valid: #E5F9DA;
+ $color-invalid: #F6D4D4;
+ // fonts
+ $color-text-default: #000;
+ $color-text01: #303030;
+ $color-text02: rgba(255, 255, 255, .66);
+ $color-text03: #fff;
+ $color-text04: #454545;
+ $color-text05: #464646;
+ $color-text06: #666;
+
+ $color-primary:#F77737;
+ $color-secondary:#833AB4;
+ $color-sub: #252525;
+ $bg-color-linear-top: $color-secondary;
+ $bg-color-linear-bottom: $color-primary;
+ $bg-color-footer: rgba(0, 0, 0, .8705882352941177);
