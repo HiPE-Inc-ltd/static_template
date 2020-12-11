@@ -27,7 +27,7 @@ Example of heading with space
 Example of heading with space
 Example of heading with space
 
-## Purpose
+## 1. Introduction
 
 Using '-' for blanks works for me.
 Using '-' for blanks works for me.
@@ -43,7 +43,7 @@ Using '-' for blanks works for me.
 Using '-' for blanks works for me.
 Using '-' for blanks works for me.
 
-### Introduction
+### 1.1 Purpose
 
 Using '-' for blanks works for me.
 Using '-' for blanks works for me.
