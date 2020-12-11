@@ -3,7 +3,7 @@
 This repo serves as a starter template for [static web pages](https://en.wikipedia.org/wiki/Static_web_page).Instead creating your own front-end architecture, use this for quick and easy development.
 
 - [1. Installation](#1-installation)
-  - [1.1 Prerequisites](#1.1-prerequisites)
+  - [1.1 Prerequisites](#11-prerequisites)
 - [2. Usage](#2-usage)
 - [3. Additional Info](#3-addtional-info)
 - [4. Credits](#4-credits)
