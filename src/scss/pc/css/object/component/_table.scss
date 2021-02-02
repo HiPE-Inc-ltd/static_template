@@ -15,12 +15,14 @@
     &__overviewTbl__dataleft {
         text-align: left;
         border-bottom: 1px solid #eee;
+        font-weight: 700;
         @include is-sp{
             @include font-line(11);
         }
     }
 
     &__overviewTbl__data {
+        font-weight: 700;
         text-align: center;
         border-bottom: 1px solid #eee;
         @include is-sp{

@@ -6,7 +6,7 @@
     }
 
     &--under {
-        @include is-tabpc {
+        @include is-tablet {
         padding-top: 40px;
         }
     }
@@ -20,15 +20,15 @@
         display: block;
     }
 
-    @include is-tabpc {
+    @include is-tablet {
         margin: 0 auto;
     }
 
     .left,
     .right {
-        flex: 1 1 48%;
+        width: 50%;
         @include is-sp {
-            flex: 1 1 100%;
+            width: 100%;
             margin-bottom: 30px;
         }
         }
@@ -43,7 +43,7 @@
         display: block;
     }
 
-    @include is-tabpc {
+    @include is-tablet {
         margin: 0 auto;
     }
 

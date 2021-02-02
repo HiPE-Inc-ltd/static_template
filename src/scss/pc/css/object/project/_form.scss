@@ -1,7 +1,7 @@
 .p-form {
-    padding: 20px;
+    padding: $content-padding 0;
 
-    @include is-sp {
+    @include is-responsive {
         padding: 30px 0;
     }
 
@@ -99,10 +99,10 @@
 
     &__input{
         &--valid{
-            background-color: $color-valid;
+            background-color: $color-valid !important;
         }
         &--invalid{
-            background-color: $color-invalid;
+            background-color: $color-invalid  !important;
         }
     }
 
@@ -140,10 +140,7 @@
         transition: .2s;
         overflow: hidden;
         border: 0 solid transparent;
-
-        @include is-sp {
-            width: 100%;
-        }
+        width:100%;
     }
 
     &__icon {

@@ -111,9 +111,7 @@
 
 
 .p-popup {
-    // @include is-sp{
-    //     opacity: 0;
-    // }
+
     animation: popup 1s infinite ease;
     transform-origin: 170px 100px;
 
@@ -167,13 +165,6 @@
     animation: raise 1s infinite ease-in-out;
 
     @keyframes raise {
-        // from{
-        //     transform: translateY(3px);
-        // }
-        // to{
-        //     transform: translateY(0px);
-        // }
-
         0% {
             transform: translateY(3px);
         }
@@ -192,6 +183,74 @@
 
         100% {
             transform: translateY(3px);
+        }
+    }
+}
+
+.p-animation {
+    &--fade {
+        animation: pulse 2s both infinite linear;
+
+        @keyframes pulse {
+            20% {
+                opacity: 0.3;
+            }
+        }
+    }
+
+    &--clouds {
+        animation: up 10s both infinite ease-in-out;
+
+        &-delay {
+            &:nth-child(2) {
+                animation: up 30s both infinite 1s ease-in-out;
+            }
+
+            &:nth-child(3) {
+                animation: up 11s both infinite 1s ease-in-out;
+            }
+
+            &:nth-child(4) {
+                animation: up 13s both infinite 1s ease-in-out;
+            }
+
+            &:nth-child(5) {
+                animation: up 15s both infinite 2s ease-in-out;
+            }
+
+            &:nth-child(6) {
+                animation: up 15s both infinite 1s ease-in-out;
+            }
+        }
+
+        @keyframes up {
+            0% {
+                transform: translateY(-20px);
+            }
+
+            10% {
+                transform: translateY(-15px);
+            }
+
+            25% {
+                transform: translateY(-25px);
+            }
+
+            45% {
+                transform: translateY(0);
+            }
+
+            60% {
+                transform: translateY(-30px);
+            }
+
+            85% {
+                transform: translateY(-5px);
+            }
+
+            100% {
+                transform: translateY(-20px);
+            }
         }
     }
 }

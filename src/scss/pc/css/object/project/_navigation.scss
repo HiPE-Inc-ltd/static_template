@@ -108,14 +108,14 @@
             color: white;
             font-weight: 700;
 
-            @include is-tabpc {
+            @include is-pc {
                 @include font-line(16);
             }
         }
     }
 
     &__burger {
-        @include is-tabpc {
+        @include is-pc {
             display: none;
         }
 
@@ -128,7 +128,7 @@
             -webkit-clip-path: circle(100px at 90% -15%);
             left: 0;
             transition: all 1s ease-out;
-            top: -20px;
+            top: -25px;
             pointer-events: none;
             z-index: 999;
         }
@@ -164,7 +164,7 @@
     }
 
     .btn-menu {
-        @include is-tabpc {
+        @include is-pc {
             display: none;
         }
 

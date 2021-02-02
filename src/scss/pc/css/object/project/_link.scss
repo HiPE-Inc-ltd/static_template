@@ -12,12 +12,14 @@
         text-decoration: none;
         color: $color-text-default;
 
-        @include is-sp {
+        @include is-responsive {
             display: block;
         }
-
-        @include is-tabpc {
+        @include is-pc{
             padding: 0 70px;
+        }
+        @include is-laptop {
+            padding: 0 50px;
             display: flex;
             align-items: baseline;
             justify-content: space-evenly;
@@ -34,34 +36,32 @@
     &__sealContainer {
         transition: 0.3s ease-out all;
 
-        @include is-tabpc {
+        @include is-laptop {
             display: flex;
             justify-content: center;
             width: 120px;
+            margin: 0 auto;
         }
     }
 
     &__seal {
         transition: 0.3s ease-out all;
         margin-bottom: 0;
-        @include is-sp{
-            margin-bottom: 15px;
-        }
     }
 
     &__date {
         @include font-line(14);
-        color: #54595F;
+        color: $color-text-default;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-
-        @include is-tabpc {
-            width: 190px;
-            text-align: left;
+        font-weight: bold;
+        @include is-laptop {
+            width: 100px;
+            text-align: center;
         }
 
-        @include is-sp {
+        @include is-responsive {
             text-align: center;
         }
     }
@@ -71,21 +71,22 @@
         text-align: left;
         margin: 0;
         padding: 0;
-        white-space: nowrap;
+        // white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
 
-        @include is-tabpc {
-            width: 500px;
-        }
-
-        @include is-sp {
-            text-align: center;
+        @include is-laptop {
+            width: 550px;
         }
     }
     &__actionText{
-        @include is-sp{
+        @include is-responsive{
             margin-top: 15px;
+            @include font-line(14,16);
+            font-weight: bold;
+            color: $color-primary-alt;
+            text-decoration: underline;
+            text-underline-position: under
         }
     }
 

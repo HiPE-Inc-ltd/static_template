@@ -1,6 +1,6 @@
 .p-addons {
     // background-image: url('https://demo.hipe.asia/public/img/bg_contact_us.jpg');
-    background-position: bottom center;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
@@ -24,7 +24,7 @@
             text-align: center;
         }
 
-        .mascot {
+        .tasha {
             width: 77%;
             max-width: 77%;
 
@@ -51,8 +51,7 @@
         }
 
         .logo-hipe {
-            width: 36%;
-            max-width: 36%;
+            width:auto;
         }
     }
 
@@ -64,11 +63,17 @@
 
     .ttl {
         @include font-line(24);
+        font-weight: 700;
+        @include is-responsive{
+            @include font-line(18);
+        }
     }
 
     .text {
         @include font-line(18);
-
+        @include is-responsive{
+            @include font-line(15);
+        }
         i {
             margin-right: 5px;
         }

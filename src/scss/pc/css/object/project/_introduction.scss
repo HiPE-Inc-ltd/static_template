@@ -41,10 +41,6 @@
 
                 }
 
-                @include is-tab {
-                    @include font-line(26);
-                }
-
                 @include is-pc {
                     @include font-line(48);
                 }

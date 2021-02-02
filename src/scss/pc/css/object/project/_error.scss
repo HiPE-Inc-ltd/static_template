@@ -10,7 +10,7 @@
     }
 
     &__frame {
-        @include is-tabpc {
+        @include is-pc {
             height: 390px;
         }
     }
@@ -40,7 +40,7 @@
     }
 
     li {
-        @include is-tabpc {
+        @include is-pc {
             list-style: decimal;
         }
     }

@@ -46,7 +46,7 @@
     }
 
     &__sitemap {
-        @include is-tabpc {
+        @include is-pc {
             padding: 0 0 0 80px;
         }
 
@@ -56,7 +56,7 @@
     }
 
     &__contact {
-        @include is-tabpc {
+        @include is-pc {
             padding: 0 0 0 25px;
         }
 
@@ -109,5 +109,9 @@
         color: $color-text02;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         @include font-line(13);
+
+        @include is-sp{
+            text-align: center;
+        }
     }
 }
