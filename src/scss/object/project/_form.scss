@@ -1,0 +1,241 @@
+.p-form {
+  &__container {
+    display: flex;
+    margin-bottom: 20px;
+    &--input,
+    &--checkbox,
+    &--button {
+      display: flex;
+      flex: 1 1 auto;
+      flex-flow: column;
+    }
+    &--button {
+      padding-top: 20px;
+    }
+    &--check {
+      flex-flow: row;
+    }
+  }
+  label {
+    color: $color-sub;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  input[type='text'],
+  input[type='password'],
+  input[type='date'],
+  input[type='email'] {
+    border: none;
+    border-bottom: 1px solid #a9a9a9;
+    font-family: Karla, sans-serif !important;
+    padding: 10px;
+    transition: all 0.1s ease-in-out;
+
+    &:focus {
+      border-bottom: 2px solid $color-accent;
+    }
+  }
+
+  &__link {
+    color: $color-sub;
+    transition: color 0.3s ease-in-out;
+    &:hover {
+      color: $color-accent;
+    }
+  }
+}
+
+.p-form03,
+.p-form04,
+.p-form01 {
+  //テーブル左
+  &__heading {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    @include font-line(16, 16);
+    letter-spacing: 1.12px;
+    color: $color-sub;
+    font-weight: 500;
+    @include is-laptop {
+      margin-bottom: 16px;
+    }
+    @include is-responsive {
+      min-height: 40px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+  &__error {
+    font-weight: bold;
+    @include font-line(14, 14);
+    letter-spacing: 2.1px;
+    color: $color-error;
+    margin-top: 8px;
+    font-weight: 500;
+    text-align: left;
+  }
+  &__data {
+    position: relative;
+    $data: &;
+
+    @include is-laptop {
+      margin-bottom: 40px;
+    }
+
+    @include is-responsive {
+      margin-bottom: 40px;
+    }
+
+
+    &--split {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+
+      #{$data}__group {
+        width: 210px;
+      }
+    }
+
+    &--multi {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      width: 100%;
+
+      @include is-responsive {
+        flex-direction: column;
+      }
+
+      #{$data}__group {
+        width: 160px;
+      }
+      .line {
+        height: 0px;
+        border: 1px solid #051c01;
+        width: 14px;
+      }
+    }
+  }
+
+  &--left {
+    text-align: left;
+  }
+
+  &--half {
+    @include is-laptop {
+      display: inline-block;
+      width: 367px;
+      vertical-align: top;
+    }
+
+    @include is-responsive {
+      margin-bottom: 40px;
+    }
+
+    &.is-right {
+      @include is-laptop {
+        margin-left: 20px;
+      }
+    }
+  }
+}
+
+.p-form02 {
+  width: 660px;
+  margin-bottom: 80px;
+  &__heading,
+  &__label {
+    font-weight: bold;
+  }
+  &__heading {
+    color: #7c7c7c;
+    margin-bottom: 34px;
+  }
+  &__label {
+    color: #051c01;
+    @include font-line(16, 16);
+    letter-spacing: 0.8px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    span {
+      margin-left: 8px;
+    }
+  }
+  &__formlist {
+    width: 100%;
+    &__row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 25px;
+    }
+    &__group {
+      width: 200px;
+      &--single {
+        width: 630px;
+      }
+    }
+  }
+  &__inputfield {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    input {
+      height: 40px;
+    }
+    &--multi {
+      padding: 5px 0 24px;
+      input {
+        width: 171px;
+        height: 40px;
+        background: #fff;
+      }
+    }
+  }
+}
+
+.p-form03 {
+  width: 660px;
+  &__data {
+    &__group {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      input {
+        width: 631px;
+      }
+    }
+  }
+}
+
+.p-form04 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 660px;
+  $form: &;
+  &__group {
+    &:first-child {
+      width: 399px;
+      input {
+        width: 370px;
+      }
+    }
+    &:last-child {
+      width: 236px;
+      input {
+        width: 213px;
+      }
+    }
+  }
+  &__data {
+    &__group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}

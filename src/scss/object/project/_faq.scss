@@ -1,0 +1,210 @@
+.p-faq01 {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: white;
+  padding: 20px;
+  margin: 20px 0;
+  &__action {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: -5px;
+    color: #0483ff;
+    font-weight: bold;
+    @include font-line(20);
+  }
+  &__question {
+    position: relative;
+    width: 100%;
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+    @include font-line(16);
+  }
+  &__answer {
+    padding: 30px 0 10px;
+  }
+  .hidden {
+    display: none;
+  }
+  .show {
+    display: block;
+  }
+  .active {
+    color: #0483ff;
+  }
+}
+.p-faq02 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  &__item {
+    border: 0.5px solid #acacac;
+    border-left-color: $color-main;
+    border-left-width: 5px;
+    padding: 25px 20px;
+    flex: 1 1 50%;
+    &:nth-child(n + 3) {
+      @include is-laptop {
+        flex: 1 1 calc(100% / 3);
+      }
+    }
+    @include is-responsive {
+      flex: 1 1 100%;
+    }
+    .question,
+    .answer {
+      display: flex;
+      position: relative;
+      i {
+        height: 35px;
+        width: 35px;
+        @include font-line(20, 20);
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+      }
+      p {
+        padding-left: 45px;
+        display: inline-block;
+      }
+    }
+    .question {
+      @include font-line(23, 27);
+      color: $color-text-default;
+      margin-bottom: 15px;
+      p {
+        font-weight: 600;
+      }
+    }
+    .answer {
+      @include font-line(16, 20);
+      font-weight: 400;
+      color: $color-text-sub;
+      i {
+        @include font-line(18, 18);
+      }
+    }
+  }
+}
+.p-faq03 {
+  max-width: 800px;
+  margin: 0 auto 70px;
+  @include is-sp {
+    padding: 0 14px;
+    margin: 0;
+  }
+  &__inner {
+    padding-bottom: 50px;
+    margin-bottom: 44px;
+    border-bottom: 1px solid #e5e5e5;
+    transition: all 0.3s ease;
+    @include is-responsive {
+      padding-bottom: 40px;
+    }
+    @include is-responsive {
+      &:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 72px;
+      }
+    }
+    &.isActive {
+      padding-bottom: 74px;
+    }
+    .question,
+    .answer {
+      @include font-line(14, 31);
+      color: $color-sub;
+      letter-spacing: 2.1px;
+    }
+
+    .question {
+      @include is-max(775px) {
+        width: 70%;
+      }
+    }
+    .icon {
+      display: inline-flex;
+      @include font-line(30, 30);
+      color: $color-main;
+      letter-spacing: 1.5px;
+      font-family: $font-family-en;
+      font-weight: 300;
+      margin-right: 24px;
+      @include is-responsive {
+        @include font-line(24, 30);
+        margin-right: 11px;
+      }
+    }
+    .toggle {
+      display: inline-flex;
+      height: 32px;
+      width: 32px;
+      background: $color-main;
+      position: relative;
+      margin-left: auto;
+      border-radius: 100%;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      @include is-responsive {
+        width: 24px;
+        height: 24px;
+        margin-top: 3px;
+      }
+      &:before,
+      &:after {
+        transition: all 0.3s ease;
+      }
+      &.toClose {
+        &:before,
+        :after {
+          content: "";
+          position: absolute;
+          background-color: #fff;
+          height: 1px;
+          width: calc(100% - 16px);
+        }
+      }
+      &.toOpen {
+        &:before,
+        &:after {
+          content: "";
+          position: absolute;
+          background-color: #fff;
+        }
+        &:before {
+          height: 1px;
+          width: calc(100% - 16px);
+        }
+        &:after {
+          height: calc(100% - 16px);
+          width: 1px;
+        }
+      }
+    }
+    &__question,
+    &__answer {
+      display: flex;
+      align-items: flex-start;
+    }
+    &__answer {
+      transition: all 0.3s ease;
+      overflow: hidden;
+      transform: translateY(0);
+      max-height: 0;
+      opacity: 0;
+      &.isDisplay {
+        transform: translateY(34px);
+        max-height: 100%;
+        opacity: 1;
+      }
+      .icon {
+        margin-right: 28px;
+      }
+    }
+  }
+}

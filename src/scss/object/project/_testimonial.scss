@@ -1,0 +1,40 @@
+.p-testimonial {
+    display: flex;
+    justify-content: space-between;
+    &__intro,
+    &__showcase {
+        flex: 1 1 auto;
+        width: 50%;
+    }
+    &__author,
+    &__writer {
+        display: flex;
+        align-items: center;
+    }
+    &__showcase {
+        padding-right: 50px;
+    }
+    &__intro {
+        padding-left: 50px;
+    }
+    &__message {
+        @include font-line(16);
+        margin-bottom: 10px;
+    }
+    &__author {
+        .avatar,
+        .avatar-company {
+            height: 100px;
+        }
+        .information {
+            margin-left: 10px;
+            font-weight: 600;
+            .title {
+                @include font-line(18);
+            }
+            .name {
+                @include font-line(22);
+            }
+        }
+    }
+}

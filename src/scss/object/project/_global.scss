@@ -1,0 +1,92 @@
+.p-global {
+  position: fixed;
+  right: 0;
+  bottom: 40px;
+  z-index: 999;
+  @include is-responsive {
+    display: none;
+  }
+
+  &-sp {
+    display: flex;
+    width: 315px;
+    margin:0 auto;
+    justify-content: space-between;
+    display: none;
+    @include is-responsive {
+      display: flex;
+      width: 80%;
+    }
+    @include is-sp {
+      width: 313px;
+    }
+    @include is-max (335px) {
+      width: 100%;
+      justify-content: space-around;
+    }
+  }
+  &__link {
+    margin-bottom: 8px;
+    &:hover {
+      opacity: 0.6;
+    }
+    a {
+      height: 108px;
+      width: 100px;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      box-shadow: 0px 3px 30px #0000001c;
+      @include is-sp {
+        width: 145px;
+      }
+      p {
+        text-align: center;
+        @include font-line(12, 18);
+        letter-spacing: 1.2px;
+        font-weight: 500;
+      }
+    }
+    &:nth-child(odd) {
+      a {
+        background-color: $color-main;
+        p {
+          color: #fff;
+        }
+      }
+    }
+    &:nth-child(even) {
+      a {
+        background-color: #fff;
+        p {
+          color: $color-sub;
+        }
+      }
+    }
+  }
+  &__frame {
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  &--goToTop {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 6px 6px 20px #0000001f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    top: -28px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    cursor: pointer;
+    i {
+      color: $color-main;
+      @include font-line(15, 15);
+      transform: rotate(90deg);
+    }
+  }
+}

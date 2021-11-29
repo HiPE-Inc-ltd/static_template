@@ -1,0 +1,219 @@
+.c-text01 {
+  width: 100%;
+  padding: 18px 16px;
+  border: 1px solid transparent;
+  background: #ffffff;
+  color: $color-sub;
+  font-family: $font-family-base;
+  @include is-responsive {
+    height: 56px;
+    @include font-line(16, 28);
+  }
+  @include is-laptop {
+    height: 56px;
+    @include font-line(14, 14);
+    letter-spacing: 2.1px;
+  }
+  &:focus {
+    border-color: #1e72be;
+  }
+  &--error {
+    border-color: $color-error;
+  }
+  &--disabled {
+    background-color: #f4f4f4;
+  }
+}
+.c-textarea01 {
+  padding: 24px;
+  width: 100%;
+  border: solid 1px transparent;
+  background: #ffffff;
+  color: $color-sub;
+  font-family: $font-family-base;
+  font-weight: normal;
+  @include is-responsive {
+    height: 100px;
+    @include font-line(16, 24);
+  }
+  @include is-laptop {
+    height: 240px;
+    letter-spacing: 2.1px;
+    @include font-line(14);
+  }
+  &:focus {
+    border-color: #1e72be;
+  }
+  &--error {
+    border-color: #d65c5c;
+  }
+  &--disabled {
+    background-color: #f4f4f4;
+  }
+}
+
+.c-select01 {
+  padding: 5px 10px;
+  // border: solid 1px #ccc;
+  border: solid 1px transparent;
+  border-radius: 5px;
+  width: 100%;
+  background: #fff url(../../../src/icons/select_arrow.svg) no-repeat;
+  background-position: right 14px center;
+  background-size: 16px 8px;
+  height: 50px;
+  font-size: 1.125rem;
+  width: 100%;
+  margin: 11px 0px 25px 0px;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.c-checkbox03 {
+  $checkbox: &;
+  position: relative;
+  &__input {
+    width: 0 !important;
+    height: 0 !important;
+    margin: auto !important;
+    padding: 0 !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: absolute;
+    z-index: -999;
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    &:checked + #{$checkbox}__label {
+      #{$checkbox}__check {
+        background: #1e72be;
+        &:after {
+          content: "\f00c";
+          display: flex;
+          width: 18px;
+          height: 18px;
+          font-family: "Font Awesome 5 Free";
+          font-style: normal;
+          font-weight: 900;
+          color: #fff;
+          margin: auto 0;
+          align-items: center;
+          justify-content: center;
+          font-size: 14px;
+          transform: scale(0.7);
+        }
+      }
+    }
+  }
+  &__check {
+    display: flex;
+    justify-content: center;
+    content: "";
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    margin: 0 5px 0 0;
+    border: solid 1px #c9c9c9;
+    border-radius: 3px;
+    &:before {
+    }
+  }
+  &__name {
+    width: calc(100% - 18px);
+    padding-left: 7px;
+  }
+  &__label {
+    display: flex !important;
+    align-items: center;
+    position: relative;
+  }
+}
+
+.c-radio {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  &__input {
+    display: none;
+  }
+
+  &__radio {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid $color-border;
+    margin-right: 12px;
+    box-sizing: border-box;
+    padding: 4px;
+
+    &::after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      background: $color-main;
+      display: block;
+      border-radius: 50%;
+      transform: scale(0);
+    }
+  }
+
+  &__input:checked + &__radio::after {
+    transform: scale(1);
+  }
+}
+
+.c-file {
+  @include font-line(14, 82);
+  width: 240px;
+  height: 56px;
+  line-height: 1;
+  background-color: #fff;
+  color: #5b6060;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  box-shadow: 1px 1px 40px 1px rgb(0 0 0 / 15%);
+
+  &__input {
+    display: none;
+  }
+}
+
+.c-information {
+  margin-bottom: 40px;
+  color: $color-sub;
+
+  &__label {
+    @include font-line(16, 24);
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    padding-bottom: 16px;
+
+    @include is-responsive {
+      @include font-line(14, 20);
+    }
+  }
+  &__data {
+    @include font-line(14);
+    letter-spacing: 0.15em;
+  }
+  &__image-list {
+    display: flex;
+    flex-flow: wrap;
+    row-gap: 30px;
+    justify-content: space-between;
+
+    .information-image {
+      width: 47.8%;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
