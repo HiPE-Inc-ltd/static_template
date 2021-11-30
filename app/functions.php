@@ -1,7 +1,10 @@
 <?php
-require_once('define.php');
+require_once 'define.php';
 function includeWithVariables($filePath, $variables = array(), $print = true)
 {
+    /* 
+    *  refer @ https://stackoverflow.com/questions/11905140/php-pass-variable-to-include
+    */
     $output = NULL;
     if (file_exists($filePath)) {
         // Extract the variables to a local namespace
@@ -60,53 +63,59 @@ function isLocalEnvironment()
         return true;
     }
 }
+function console_log($data = null)
+{
+    return '<script> console.log(' . json_encode($data) . ')</script>';
+}
 function resource($type = null, $file = null)
 {
     $path = isLocalEnvironment() ? '' : getServerProtocol() . getHost();
     switch ($type) {
         case 'css':
-            return $path . CSS . $file;
+            $path .= CSS . $file;
             break;
         case 'js':
-            return $path . JS . $file;
+            $path .= JS . $file;
             break;
         case 'img':
-            return $path . IMG . $file;
+            $path .= IMG . $file;
             break;
         case 'media':
-            return $path . MEDIA . $file;
+            $path .= MEDIA . $file;
             break;
         case 'iconfont':
-            return $path . ICONFONT . $file;
+            $path .= ICONFONT . $file;
             break;
         case 'vendor':
-            return $path . VENDOR . $file;
+            $path .= VENDOR . $file;
             break;
         default:
             return '';
             break;
     }
+    return $path;
 }
 function resources($type = null, $files = [])
 {
-    $path = isLocalEnvironment() ? '' : getServerProtocol() . getHost();
+    $hostPath = isLocalEnvironment() ? '' : getServerProtocol() . getHost();
+    $html = '';
+    console_log($files);
     if (is_array($files) && $files != null) {
         switch ($type) {
             case 'css':
                 $format = '<link rel="stylesheet" href="%s"/>';
-                $getType = CSS;
+                $resourcesBasePath = CSS;
                 break;
             case 'js':
                 $format = '<script type="text/javascript" src="%s"></script>';
-                $getType = JS;
+                $resourcesBasePath = JS;
                 break;
         }
         foreach ($files as $file) {
-            $code = '';
-            $code .= sprintf($format, $path . $getType . $file) . PHP_EOL;
+            $html .= sprintf($format, $hostPath . $resourcesBasePath . $file);
         }
-        return $code;
+        return $html;
     } else {
-        throw new Exception('Files required array as parameter' . PHP_EOL);
+        throw new Exception('Files required array as parameter.' . PHP_EOL);
     }
 }

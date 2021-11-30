@@ -20,9 +20,6 @@ $color-danger: #dc3545;
 *::after {
   box-sizing: border-box;
 }
-html {
-  height: 100%;
-}
 body {
   background-color: #fefeff;
   color: $color-text05;
@@ -40,13 +37,6 @@ body {
   min-height: $body-min-height;
   min-height: -webkit-fill-available;
 }
-
-// // page transition
-// section {
-//   opacity: 0;
-//   transition: 0.2s ease-in;
-// }
-
 // remove style
 ul,
 li {

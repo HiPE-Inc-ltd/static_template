@@ -1,4 +1,5 @@
 .c-button {
+  $main: &;
   width: 100%;
   border: 1.5px solid transparent;
   text-decoration: none;
@@ -9,12 +10,50 @@
   position: relative;
   cursor: pointer;
   transition: all 0.3s ease-out;
-  // box-shadow: 1px 1px 40px 1px rgba(0, 0, 0, 0.15);
-  box-shadow: 15px 15px 30px #0000002C;
+  box-shadow: 15px 15px 30px #0000002c;
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    transform: rotate(45deg);
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    right: 18px;
+  }
+  // extra
+  &--nobullet {
+    &:before,
+    &:after {
+      display: none;
+    }
+  }
+  &--return {
+    &:after {
+      border: unset;
+      right: unset;
+      border-bottom: 2px solid #fff;
+      border-left: 2px solid #fff;
+      left: 18px;
+    }
+  }
+  &--disable {
+    pointer-events: none !important;
+    opacity: 0.5;
+  }
+  &--roundCorner {
+    border-radius: 150px;
+  }
+  &--smoothCorner {
+    border-radius: 6px;
+  }
   // size
   &--xxl {
     @include is-laptop {
-      height: 75px;
+      height: 90;
       @include font-line(23, 23);
     }
   }
@@ -29,8 +68,7 @@
   }
   &--l {
     @include is-responsive {
-      // height: calc(56px / 2);
-      height: calc(56px);
+      height: 45px;
       @include font-line(16, 16);
     }
     @include is-laptop {
@@ -46,7 +84,6 @@
     @include is-laptop {
       height: 50px;
       @include font-line(20, 20);
-      letter-spacing: 0.14em;
     }
   }
   &--s {
@@ -64,7 +101,7 @@
     background-color: $color-main;
     border-color: $color-main;
     color: #fff;
-    &:hover {
+    &:not(#{$main}--nohover):hover {
       background-color: #fff;
       border-color: $color-main;
       color: $color-main;
@@ -73,15 +110,13 @@
       }
     }
     &--w {
-      letter-spacing: 0.15em;
-      font-weight: 500;
       background-color: #fff;
       border-color: $color-main;
       color: $color-main;
       &:after {
         border-color: $color-main;
       }
-      &:hover {
+      &:not(#{$main}--nohover):hover {
         background-color: $color-main;
         border-color: $color-main;
         color: #fff;
@@ -92,19 +127,19 @@
     }
   }
   &--sub {
-    background-color: #fff;
+    background-color: $color-sub;
     border-color: $color-sub;
-    color: $color-sub;
-    &:hover {
-      background-color: $color-sub;
+    color: #fff;
+    &:not(#{$main}--nohover):hover {
+      background-color: #fff;
       border-color: $color-sub;
-      color: #fff;
+      color: $color-sub;
       &:after {
-        border-color: #fff !important;
+        border-color: $color-sub !important;
       }
     }
     &:after {
-      border-color: $color-sub !important;
+      border-color: #fff !important;
     }
     &--w {
       background-color: #fff;
@@ -113,7 +148,7 @@
       &:after {
         border-color: $color-sub;
       }
-      &:hover {
+      &:not(#{$main}--nohover):hover {
         background-color: $color-sub;
         border-color: $color-sub;
         color: #fff;
@@ -127,7 +162,7 @@
     background-color: $color-accent;
     border-color: $color-accent;
     color: #fff;
-    &:hover {
+    &:not(#{$main}--nohover):hover {
       background-color: #fff;
       border-color: $color-accent;
       color: $color-accent;
@@ -142,7 +177,7 @@
       &:after {
         border-color: $color-accent;
       }
-      &:hover {
+      &:not(#{$main}--nohover):hover {
         background-color: $color-accent;
         border-color: $color-accent;
         color: #fff;
@@ -152,102 +187,4 @@
       }
     }
   }
-}
-
-.c-buttonCircle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 56px;
-  width: 56px;
-  border-radius: 100%;
-  background: transparent linear-gradient(90deg, #1d73bf, #2ea6df) 0 0 no-repeat
-    padding-box;
-
-  .symbol {
-    color: #fff;
-    height: 28px;
-    width: 22px;
-    @include font-line(24, 24);
-  }
-}
-
-.c-buttonContact {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 42px;
-  width: 233px;
-  border-radius: 65px;
-  color: $color-sub;
-  @include font-line(12);
-  letter-spacing: 1.8px;
-  transition: all 0.3s ease-out;
-  box-shadow: 1px 1px 40px 1px rgba(0, 0, 0, 0.15);
-  outline-offset: -3px;
-  outline: 1px solid $color-main;
-  background: #fff;
-  &:hover {
-    background-color: $color-main;
-    outline-color: #fff;
-    color: #fff;
-    .icon {
-      color: #fff;
-    }
-  }
-  .icon {
-    color: #5eafed;
-    margin-right: 9.81px;
-    @include font-line(11, 11);
-  }
-
-  &--lg {
-    width: 240px;
-    height: 48px;
-  }
-}
-
-.c-buttonContact2 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-  border-radius: 65px;
-  color: $color-sub;
-  @include font-line(12);
-  letter-spacing: 1.8px;
-  transition: all 0.3s ease-out;
-  background: #fff;
-  &:hover {
-    background: $color-main;
-    border-color: #fff;
-    color: #fff;
-    .icon {
-      color: #fff;
-    }
-  }
-  .icon {
-    color: #5EAFED;
-    margin-right: 9.81px;
-    @include font-line(11, 11);
-  }
-  &--lg {
-    width: 240px;
-    height: 48px;
-  }
-}
-
-.c-buttonUp {
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 48px;
-  height: 48px;
-  background: #fff;
-  border-radius: 50%;
-  // box-shadow: 2px 1px 13px 0px rgb(112 112 112 / 30%);
-  // box-shadow: 1px 1px 40px 1px rgb(0 0 0 / 15%);
-  box-shadow: 15px 15px 30px #0000002c;
 }

@@ -1,0 +1,32 @@
+@import '../core/mixins/*';
+@import '../core/root/_variables';
+
+.partslist {
+  padding: 5rem 1rem;
+  &__inner {
+    align-items: self-start;
+    justify-content: space-between;
+  }
+  &__heading {
+    @include font-line(40, 40);
+    font-weight: 700;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $color-sub;
+    @include is-responsive {
+      @include font-line(20, 20);
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+  }
+  pre {
+    padding: 10px;
+    background: #eeeeee;
+    font-size: 12px;
+    font-size: 0.75rem;
+    border: solid 1px #333;
+    width: 100%;
+    overflow: scroll;
+    font-family: monospace, monospace;
+  }
+}
