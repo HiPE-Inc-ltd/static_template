@@ -15,7 +15,7 @@
     <!-- end font -->
     <!-- style -->
     <link rel="stylesheet" href="<?= resource('css', 'style.css') ?>" />
-    <?= resources('css', isset($headCSS) ? $headCSS : '') ?>
+    <?= resources('css', isset($headCSS) ? $headCSS : '', true) ?>
     <!-- end style -->
 </head>
 

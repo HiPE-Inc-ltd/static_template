@@ -95,11 +95,10 @@ function resource($type = null, $file = null)
     }
     return $path;
 }
-function resources($type = null, $files = [])
+function resources($type = null, $files = [], $fileModified = false)
 {
     $hostPath = isLocalEnvironment() ? '' : getServerProtocol() . getHost();
     $html = '';
-    console_log($files);
     if (is_array($files) && $files != null) {
         switch ($type) {
             case 'css':
@@ -112,7 +111,13 @@ function resources($type = null, $files = [])
                 break;
         }
         foreach ($files as $file) {
-            $html .= sprintf($format, $hostPath . $resourcesBasePath . $file);
+            $fullPath = $temp = $resourcesBasePath . $file;
+            $version = 0;
+            if ($fileModified && file_exists(__ROOT__ . $temp)) {
+                $version =  date("YmdHis", filemtime(__ROOT__ . $temp));
+            }
+            $fullPath = $hostPath . $temp . '?v=' . $version;
+            $html .= sprintf($format, $fullPath);
         }
         return $html;
     } else {

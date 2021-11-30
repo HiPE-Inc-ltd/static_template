@@ -1,5 +1,5 @@
 <?php
-define('ROOT', dirname(__DIR__, 1));
+define('__ROOT__', dirname(__DIR__, 1));
 define('CSS', '/public/release/mini/');
 define('JS', '/public/release/ugly/');
 define('IMG', '/public/release/tiny/');

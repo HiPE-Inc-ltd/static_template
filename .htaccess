@@ -75,8 +75,18 @@ ExpiresByType text/css                  "access plus 1 year"
 ExpiresByType application/javascript    "access plus 1 year"
 </IfModule>
 
-RewriteEngine on
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+    
+    RewriteEngine On 
+    RewriteBase / 
 
-RewriteRule ^(.+)\.php$ /$1 [R,L]
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^(.*?)/?$ /$1.php [NC,END]
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    RewriteRule ^(.+)\.php$ /$1 [R,L]
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^(.*?)/?$ /$1.php [NC,END]
+</IfModule>
