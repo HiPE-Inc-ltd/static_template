@@ -25,7 +25,7 @@ Before you begin, ensure you have met the following requirements:
 | Tool                                                                 | Version | Description                                                                           |
 | -------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------- |
 | [NVM](https://github.com/coreybutler/nvm-windows/releases/tag/1.1.7) | > 1.1   | Node version manager for fast switching node version                                  |
-| Node                                                                 | >= 8.15 | Install Node via [NVM](https://github.com/coreybutler/nvm-windows/releases/tag/1.1.7) |
+| Node                                                                 | 14.15.0 | Install Node via [NVM](https://github.com/coreybutler/nvm-windows/releases/tag/1.1.7) |
 
 :warning: If you have Node in your local machine please delete and reinstall it using the NVM.
 
@@ -36,16 +36,18 @@ To install Static template in your local machine, run this following script in y
 **Windows**:
 
 ```sh
- git clone https://github.com/HiPE-Inc-ltd/static_template
+ git clone https://github.com/hipe-japan-inc/static_template.git
 ```
 
-## <a name='Usage'></a>:computer: Usage of Static template
+:warning: If you have Node in your local machine please delete and reinstall it using the NVM.
 
-To begin the development, follow this steps listed below:
-
+## <a name='Usage'></a>:computer: How to run scss
 1. go to **`src/`** folder
 2. run **`npm install`**
-3. after the dependencies installed, run **`gulp build && gulp sync`**
+3. verify if gulp is working. **`gulp --tasks`**
+4. after the dependencies installed, run **`gulp build && gulp sync`**
+
+Note: **`gulp --tasks`** will display all posible gulp options.
 
 ##### Code Block:
 
@@ -53,45 +55,38 @@ To begin the development, follow this steps listed below:
 cd src
 npm install
 gulp build
-gulp sync
+gulp sync #if html else use gulp watch
 ```
 
 When you run this scripts it will generate a bundled file to `public/` folder.
 
-:warning: You must only edit in `src/` folder to avoid confusion.
-
-## <a name='Contributing'></a> :memo: Contributing to Static template
-
-Before cloning, create a [new branch](https://github.com/HiPE-Inc-ltd/Nanashoku) for your local development.
-
-To contribute to Nanashoku, follow these steps:
-
-1. Fork this repository.
-2. Create a branch: `git checkout -b <branch_name>`.
-3. Make your changes and commit them: `git commit -m '<commit_message>'`
-4. Push to the original branch: `git push origin <project_name>/<location>`
-5. Create the pull request.
-
-Alternatively see the GitHub documentation on [creating a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+:warning: You must only edit in __`src/`__ folder to avoid confusion.
 
 ## <a name='Additional'></a> :paperclip: Additional Info
 
 Additional information about Static template
 
 - `src/` is the main source code
-- `public/` is the release folder of compressed file from `src/`.
-  - `public/minified/**/css` this refers to minified version of CSS
-  - `public/tinified/**/img` this refers the tinified/compressed image
-  - `public/uglified/` this refers a compressed javascript
-- ### <a name='Errors'></a>Errors
+- `public/` is the dist folder of compressed file from `src/`.
+  - `release/mini/**/*.css`  [ minified version of css ] 
+  - `release/tiny/**/*.(png,jpg,etc.)`  [ minified version of images ] 
+  - `release/ugly/**/*.js` this refers a compressed javascript
 
-  If you encounter this problem `bash gulp command not found` consider this running this script in cmd
+1. For maintaining the integrity of the images please put it under `src/image/raw/**` it create a folder under `public/release/tiny/raw/**`
+2. For generating the iconfont put the __`icon_name`__ to __`src/icons`__ and run __`gulp rebuild`__
+3. For generating vendor you can put it inside __`src/vendor`__ and run __`gulp vendor`__ to copy it in release folder. Expected result : __`public/vendor/gulp/**`__
+4. For release to production try running __`gulp purge`__ to clean the release css and remove unused css.
 
-  ```sh
-  npm install --global gulp-cli
-  ```
+### :warning:  <a name='Errors'></a>Errors
 
-  Installing the gulp in global scope.
+If you encounter this problem `bash gulp command not found` consider this running this script in cmd
+
+```sh
+npm install --global gulp-cli
+
+```
+
+Installing the gulp in global scope.
 
 ## <a name='Acknowledgements'></a>:two_hearts: Acknowledgements and References
 
