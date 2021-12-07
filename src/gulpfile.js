@@ -14,6 +14,7 @@ const size = require('gulp-size');
 
 // FOR CSS
 const cleanCSS = require('gulp-clean-css');
+const purgecss = require('gulp-purgecss'); // remove unused css styles
 
 // FOR ICON FONT
 const iconfont = require('gulp-iconfont');
@@ -61,6 +62,7 @@ const SRC_IMG_PATH_COPY_ONLY = path.resolve(SRC_ROOT_PATH, "image/raw/**/*");
 const SRC_FONT_PATH_COPY_ONLY = path.resolve(SRC_ROOT_PATH, "font/**/*");
 const SRC_VENDOR_PATH_COPY_ONLY = path.resolve(SRC_ROOT_PATH, "vendor/**/*");
 const SRC_VIDEO_PATH_COPY_ONLY = path.resolve(SRC_ROOT_PATH, "video/**/*");
+
 // DESTINATION PATH
 const DEST_ROOT_PATH = "../public/release";
 const DEST_VENDOR_ROOT_PATH = "../public/vendor/gulp"
@@ -76,6 +78,11 @@ const WATCH_ROOT_PATH = "./";
 const WATCH_JS_PATH = WATCH_ROOT_PATH + 'js/**/**';
 const WATCH_SCSS_PATH = WATCH_ROOT_PATH + 'scss/**/**';
 const WATCH_IMG_PATH = WATCH_ROOT_PATH + 'image/**/**';
+
+// PURGE CONFIGURATION
+const PURGE_CSS_SRC = path.resolve(DEST_SCSS_PATH, '**/*.css');
+const PURGE_FILE_SRC = ['../**/*.php', '../**/*.html'];
+const PURGE_DEST = DEST_SCSS_PATH;
 
 function clean_files() {
     return src(DEST_ROOT_PATH, {
@@ -105,6 +112,14 @@ function clean_media() {
     }).pipe(clean({
         force: true
     }));
+}
+
+function purgeCSS() {
+    return src(PURGE_CSS_SRC)
+        .pipe(purgecss({
+            content: PURGE_FILE_SRC
+        }))
+        .pipe(dest(PURGE_DEST))
 }
 
 function minify_scss() {
@@ -153,15 +168,6 @@ function mapGlyphs(glyph) {
         name: glyph.name,
         codepoint: glyph.unicode[0].charCodeAt(0)
     }
-}
-
-function minify_css() {
-    return src(cssPath)
-        .pipe(sourcemaps.init())
-        .pipe(concat('style.css'))
-        .pipe(postcss([autoprefixer(), cssnano()]))
-        .pipe(sourcemaps.write('.'))
-        .pipe(dest('dist/assets/css'));
 }
 
 function minify_js() {
@@ -222,7 +228,7 @@ function broswer_watch() {
     watch(WATCH_SCSS_PATH, minify_scss);
     watch(WATCH_JS_PATH, minify_js);
     watch('../*.html').on('change', browserSync.reload);
-
+    watch('../*.php').on('change', browserSync.reload);
 }
 
 function compile() {
@@ -247,5 +253,7 @@ exports.font = copy_font;
 exports.js = minify_js;
 // GENERATE ICON FONT
 exports.iconfont = generateIconFont;
+// PURGE CSS
+exports.purge = purgeCSS;
 // COPY VENDOR
 exports.vendor = series(clean_vendor, publish_vendor);
