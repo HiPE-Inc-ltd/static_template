@@ -14,10 +14,10 @@ $breakpoint-max-phone: 767px;
 $base-size: 5;
 $body-min-height: 100vh;
 // Wrapper size
-$wrap-desktop: 1300px; // mixin : is-pc
+$wrap-desktop: 1140px; // mixin : is-pc
 $wrap-laptop: 960px; // mixin : is-laptop
-$wrap-tablet: 780px; // mixin : is-tablet
-$wrap-phone: 720px; // mixin : is-sp
+$wrap-tablet: 720px; // mixin : is-tablet
+$wrap-phone: 540px; // mixin : is-sp
 
 $wrap-max-width: initial;
 $wrap-wp-margin: auto;
