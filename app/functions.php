@@ -124,3 +124,45 @@ function resources($type = null, $files = [], $fileModified = false)
         throw new Exception('Files required array as parameter.' . PHP_EOL);
     }
 }
+function callScript($fileName, $extension = 'php')
+{
+    $hostPath = isLocalEnvironment() ? '' : getServerProtocol() . getHost();
+    $fullPath = "";
+    if ($fileName != null) {
+        if (file_exists(__ROOT__ . SCRIPT . $fileName . '.' . $extension)) {
+            $fullPath .= $hostPath . SCRIPT . $fileName;
+        }
+    } else {
+        $fullPath = "(unknown path)";
+    }
+    return $fullPath;
+}
+function redirect($url, $delay = 0, $statusCode = 303)
+{
+    if ($delay !== 0 && is_int($delay)) {
+        header("refresh: $delay; url = $url");
+    } else {
+        header('Location: ' . $url, true, $statusCode);
+    }
+    die();
+}
+function checkSession()
+{
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+}
+function checkSessionId($id, $redirectIfEmpty = false, $redirectTo)
+{
+    checkSession();
+    if (!isset($_SESSION[$id]) && $redirectIfEmpty) {
+        redirect(getServerProtocol() . getHost() . '/' . $redirectTo);
+    }
+}
+function forgetSessionId($id)
+{
+    checkSession();
+    if (isset($_SESSION[$id])) {
+        unset($_SESSION[$id]);
+    }
+}
