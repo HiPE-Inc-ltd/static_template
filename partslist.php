@@ -2,7 +2,30 @@
 require('app/functions.php');
 includeWithVariables('includes/header.php', ['pageTitle' => 'partslist', 'headCSS' => ['page/partslist.css']]) ?>
 <section class="l-wrap partslist">
-    <p class="partslist__heading">
+    <ul class="partslist__floatMenu">
+        <button class="partslist__floatMenu__toggle">
+        </button>
+        <?php
+        $globalLinks = [
+            ['section_heading', 'Heading Component'],
+            ['section_button', 'button Component'],
+            ['section_button_variation', 'button Component Variation'],
+            ['section_card', 'card Component'],
+            ['section_card_variation', 'card Component Variation'],
+            ['section_form', 'form Component'],
+            ['section_form_variation', 'form Component Variation'],
+            ['section_project', 'project Component'],
+        ];
+        foreach ($globalLinks as $links) :
+        ?>
+            <li class="partslist__floatMenu__item">
+                <a href="#<?= $links[0] ?>"><?= $links[1] ?></a>
+            </li>
+        <?php
+        endforeach;
+        ?>
+    </ul>
+    <p class="partslist__heading" id="section_heading">
         HEADING COMPONENT
     </p>
     <div class="l-row l-row--wrap partslist__inner">
@@ -30,8 +53,7 @@ includeWithVariables('includes/header.php', ['pageTitle' => 'partslist', 'headCS
             </pre>
         </div>
     </div>
-
-    <p class="partslist__heading">
+    <p class="partslist__heading" id="section_button">
         BUTTON COMPONENT
     </p>
     <div class="l-row l-row--wrap partslist__inner u-mb-30">
@@ -94,7 +116,7 @@ includeWithVariables('includes/header.php', ['pageTitle' => 'partslist', 'headCS
             </pre>
         </div>
     </div>
-    <p class="partslist__heading">
+    <p class="partslist__heading" id="section_button_variation">
         BUTTON COMPONENT VARIATION
     </p>
     <div class="l-row l-row--wrap partslist__inner u-mb-30">
@@ -127,7 +149,7 @@ EXTRA
             </pre>
         </div>
     </div>
-    <p class="partslist__heading">
+    <p class="partslist__heading" id="section_card">
         CARD COMPONENT
     </p>
     <div class="l-row l-row--wrap partslist__inner u-mb-30">
@@ -140,7 +162,7 @@ EXTRA
             </pre>
         </div>
     </div>
-    <p class="partslist__heading">
+    <p class="partslist__heading" id="section_card_variation">
         CARD COMPONENT VARIATION
     </p>
     <div class="l-row l-row--wrap partslist__inner u-mb-30">
@@ -159,7 +181,7 @@ EXTRA
             </pre>
         </div>
     </div>
-    <p class="partslist__heading">
+    <p class="partslist__heading" id="section_form">
         FORM COMPONENT
     </p>
     <div class="l-row l-row--wrap partslist__inner u-mb-30">
@@ -408,7 +430,7 @@ EXTRA
             </pre>
         </div>
     </div>
-    <p class="partslist__heading">
+    <p class="partslist__heading" id="section_form_variation">
         FORM COMPONENT VARIATION
     </p>
     <div class="l-row l-row--wrap partslist__inner u-mb-30">
@@ -427,6 +449,41 @@ EXTRA
             </pre>
         </div>
     </div>
+    <p class="partslist__heading" id="section_project">
+        PROJECT COMPONENT
+    </p>
+    <div class="l-row l-row--wrap partslist__inner u-mb-30">
+        <div class="u-col-l-5  u-col-responsive-12">
+            <div class="p-imageCompare__container">
+                <div class="p-imageCompare__image">
+                    <div class="p-imageCompare__frame">
+                        <img src="<?= resource('img', 'raw/img_example_after.jpg') ?>">
+                    </div>
+                </div>
+                <div class="p-imageCompare__image p-imageCompare__overlayImage">
+                    <div class="p-imageCompare__frame">
+                        <img src="<?= resource('img', 'raw/img_example_before.jpg') ?>">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="u-col-l-6  u-col-responsive-12">
+            <pre>
+<?= trim(htmlspecialchars('<div class="p-imageCompare__container">
+                <div class="p-imageCompare__image">
+                    <div class="p-imageCompare__frame">
+                        <img src="<?= resource("img", "raw/img_example_after.jpg") ?>">
+                    </div>
+                </div>
+                <div class="p-imageCompare__image p-imageCompare__overlayImage">
+                    <div class="p-imageCompare__frame">
+                        <img src="<?= resource("img", "raw/img_example_before.jpg") ?>">
+                    </div>
+                </div>
+            </div>')) ?>
+            </pre>
+        </div>
+    </div>
 </section>
 <?php
-includeWithVariables('includes/footer.php', []) ?>
+includeWithVariables('includes/footer.php', ['footerJS' => ['all.js']]) ?>

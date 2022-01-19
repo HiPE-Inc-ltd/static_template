@@ -4,4 +4,4 @@ includeWithVariables('includes/header.php', ['pageTitle' => 'index', 'headCSS' =
 <section class="introduction">
 </section>
 <?php
-includeWithVariables('includes/footer.php', []) ?>
+includeWithVariables('includes/footer.php', ['footerJS' => ['all.js']]) ?>

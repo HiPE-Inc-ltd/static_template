@@ -5,5 +5,6 @@
         <!-- footer end here -->
     </footer>
     </body>
-
+    <!-- script here for global -->
+    <?= resources('js', isset($footerJS) ? $footerJS : '', true) ?>
     </html>

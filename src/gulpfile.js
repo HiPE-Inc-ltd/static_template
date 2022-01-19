@@ -177,7 +177,7 @@ function minify_js() {
         .pipe(size({
             showFiles: true
         }))
-        .pipe(javascriptObfuscator())
+        // .pipe(javascriptObfuscator())
         .pipe(dest(DEST_JS_PATH))
         .pipe(browserSync.stream());
 }
