@@ -9,23 +9,23 @@ This repo serves as a starter template for [static web pages](https://en.wikiped
 - [:pushpin: Prerequisites](#Prerequisites)
 - [:rocket: Installing Static Template](#Installing)
 - [:computer: Usage of Static Template](#Usage)
-- [:memo: Contributing to Static Template](#Contributing)
 - [:paperclip: Additional Info](#Additional)
   - [Errors](#Errors)
 - [:two_hearts: Acknowledgements and References](#Acknowledgements)
 - [:mailbox: Credits](#Credits)
 - [:handshake:Contribute](#Contribute)
 
+
 ## <a name='Prerequisites'></a> :pushpin: Prerequisites
 
 Before you begin, ensure you have met the following requirements:
 
-- You have a `Windows 10` machine.
+- If you're using __`Windows 10`__ please use this [NVM](https://github.com/coreybutler/nvm-windows/releases).
 
 | Tool                                                                 | Version | Description                                                                           |
 | -------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------- |
-| [NVM](https://github.com/coreybutler/nvm-windows/releases/tag/1.1.7) | > 1.1   | Node version manager for fast switching node version                                  |
-| Node                                                                 | 14.15.0 | Install Node via [NVM](https://github.com/coreybutler/nvm-windows/releases/tag/1.1.7) |
+| [NVM](https://github.com/coreybutler/nvm-windows/releases) | latest  | Node version manager for fast switching node version                                  |
+| Node                                                                 | 14.15.0 | Install Node via [NVM](https://github.com/coreybutler/nvm-windows/releases) |
 
 :warning: If you have Node in your local machine please delete and reinstall it using the NVM.
 
@@ -39,22 +39,22 @@ To install Static template in your local machine, run this following script in y
  git clone https://github.com/hipe-japan-inc/static_template.git
 ```
 
-:warning: If you have Node in your local machine please delete and reinstall it using the NVM.
+:warning: __Optional :__ If you have Node in your local machine please delete and reinstall it using the NVM.
 
 ## <a name='Usage'></a>:computer: How to run scss
-1. go to **`src/`** folder
-2. run **`npm install`**
+1. go to **`src/`** in terminal __(recommended : bash)__.
+2. run **`npm install`**. If npm is missing please refer to the __Prerequisites__.
 3. verify if gulp is working. **`gulp --tasks`**
-4. after the dependencies installed, run **`gulp build && gulp sync`**
+4. after the dependencies installed, run __`gulp build`__ or __`gulp rebuild`__ then __`gulp sync`__
 
-Note: **`gulp --tasks`** will display all posible gulp options.
+Note: **`gulp --tasks`** will display all posible gulp options. If dealing with .php instead of .html use __`gulp watch`__
 
 ##### Code Block:
 
 ```sh
 cd src
 npm install
-gulp build
+gulp build # Or gulp rebuild
 gulp sync #if html else use gulp watch
 ```
 
@@ -72,21 +72,19 @@ Additional information about Static template
   - `release/tiny/**/*.(png,jpg,etc.)`  [ minified version of images ] 
   - `release/ugly/**/*.js` this refers a compressed javascript
 
-1. For maintaining the integrity of the images please put it under `src/image/raw/**` it create a folder under `public/release/tiny/raw/**`
+1. For maintaining the integrity of the images please put it under `src/image/raw/**`, This will generate a directory `public/release/tiny/raw/**`
 2. For generating the iconfont put the __`icon_name`__ to __`src/icons`__ and run __`gulp rebuild`__
 3. For generating vendor you can put it inside __`src/vendor`__ and run __`gulp vendor`__ to copy it in release folder. Expected result : __`public/vendor/gulp/**`__
 4. For release to production try running __`gulp purge`__ to clean the release css and remove unused css.
 
 ### :warning:  <a name='Errors'></a>Errors
 
-If you encounter this problem `bash gulp command not found` consider this running this script in cmd
+If you encounter this problem `bash gulp command not found`, Try running the command below to the terminal.
 
 ```sh
-npm install --global gulp-cli
-
+#Installing the gulp in global scope.
+npm install --global gulp-cli 
 ```
-
-Installing the gulp in global scope.
 
 ## <a name='Acknowledgements'></a>:two_hearts: Acknowledgements and References
 
