@@ -10,4 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     btnShowMenu.addEventListener("click", (e) => {
         btnShowMenu.parentElement.classList.toggle('isOpen');
     });
+
+    let dummyForm = new FormModal('#test_formModal');
+    dummyForm.info();
 });

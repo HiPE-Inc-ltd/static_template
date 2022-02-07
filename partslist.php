@@ -454,6 +454,54 @@ EXTRA
     </p>
     <div class="l-row l-row--wrap partslist__inner u-mb-30">
         <div class="u-col-l-5  u-col-responsive-12">
+            <form class="p-form" method="post" action="#" enctype="multipart/form-data" id="test_formModal" formModal="true" formModalRole="confirmation">
+                <div class="p-form__container">
+                    <label class="c-label01" for="company">Company Name</label>
+                    <input type="text" class="c-text01" id="company" placeholder="company">
+                </div>
+                <div class="p-form__group">
+                    <div class="p-form__container">
+                        <label class="c-label01" for="first_name">First Name</label>
+                        <input type="text" class="c-text01" id="first_name" placeholder="Dummy Text">
+                    </div>
+                    <div class="p-form__container">
+                        <label class="c-label01" for="last_name">Last Name</label>
+                        <input type="text" class="c-text01" id="last_name" placeholder="Dummy Text">
+                    </div>
+                </div>
+                <div class="p-form__group">
+                    <div class="p-form__container">
+                        <label class="c-label01" for="first_name">First Name</label>
+                        <input type="text" class="c-text01" id="first_name" placeholder="Dummy Text">
+                    </div>
+                    <div class="p-form__container">
+                        <label class="c-label01" for="last_name">Last Name</label>
+                        <input type="text" class="c-text01" id="last_name" placeholder="Dummy Text">
+                    </div>
+                    <div class="p-form__container">
+                        <label class="c-label01" for="last_name">Last Name</label>
+                        <input type="text" class="c-text01" id="last_name" placeholder="Dummy Text">
+                    </div>
+                </div>
+                <div class="p-form__container">
+                    <label class="c-label01" for="message">Message</label>
+                    <textarea class="c-textarea01" name="message" id="message" cols="30" rows="10"></textarea>
+                </div>
+                <div class="p-form__group p-form__group--buttonArea">
+                    <button class="c-button c-button--l c-button--main">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="u-col-l-6  u-col-responsive-12">
+            <pre>
+<?= trim(htmlspecialchars('')) ?>
+            </pre>
+        </div>
+    </div>
+    <div class="l-row l-row--wrap partslist__inner u-mb-30">
+        <div class="u-col-l-5  u-col-responsive-12">
             <div class="p-imageCompare__container">
                 <div class="p-imageCompare__image">
                     <div class="p-imageCompare__frame">

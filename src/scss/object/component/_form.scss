@@ -1,3 +1,11 @@
+.c-label01 {
+  font-weight: bold;
+  color: $color-text01;
+  @include font-line(18, 20);
+  &--hidden {
+    opacity: 0;
+  }
+}
 .c-text01 {
   width: 100%;
   padding: 18px 16px;
