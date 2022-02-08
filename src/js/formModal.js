@@ -1,25 +1,166 @@
-class FormModal {
-    constructor(form = 'form') {
-        this.targetName = form;
-        this.targetElement = document.querySelector(this.targetName);
+function FormModal(form = 'form') {
+    var _this = this;
+    this.targetName = form;
+    this.targetElement = document.querySelector(this.targetName);
+    this.isActive = this.targetElement.hasAttribute('form-Modal') ? this.targetElement.getAttribute('form-Modal') : 'true';
+    this.isTriggered = this.targetElement.hasAttribute('form-Modal-Trigger') ? this.targetElement.getAttribute('form-Modal-Trigger') : 'false';
+    this.title = this.targetElement.hasAttribute('form-Title') ? this.targetElement.getAttribute('form-Title') : 'Default Title';
+    this.role = this.targetElement.hasAttribute('form-Modal-Role') ? this.targetElement.getAttribute('form-Modal-Role') : 'Confirmation';
+    this.confirmButton = null;
+    this.isSuccess = false;
+    this.isError = false;
+    this.isResponse = {};
+    this.modalData = []; // init to empty array
+    this.mount = () => {
+        initialize();
+        watchChanges();
     }
-    getInputInformation() {
-        let element = this.targetElement;
-        let arr = [];
-        // check children type 
-        for (let i = 0; i < element.length; i++) {
-            arr.push({
-                id: element.elements[i].id,
-                label: element.elements[i].labels[0]
-            })
+    /**
+     * Setter
+     */
+    /**
+     * getter
+     */
+    getResponse = () => {
+        return this.isResponse;
+    }
+    getTargetElement = () => {
+        return this.targetElement;
+    }
+    initialize = () => {
+        // register input field
+        let _el = this.targetElement;
+        for (let i = 0; i < _el.length; i++) {
+            let element = _el.elements[i];
+            if (element.tagName === 'BUTTON' && element.type == 'submit') {
+                // add event to confirmButton to open modal
+                element.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // check if function exist
+                    if (typeof displayConfirmModal == 'function') {
+                        displayConfirmModal();
+                    }
+                });
+                _this.confirmButton = element;
+            } else {
+                let searchLabel = cleanString(document.querySelector(`label[for=${element.id}]`).textContent);
+                _this.modalData.push({
+                    element: element,
+                    id: element.id,
+                    tag: element.tagName,
+                    type: element.type,
+                    label: searchLabel
+                });
+            }
         }
-        return arr;
     }
-    generateUI() {
-
+    displayConfirmModal = () => {
+        let modalContainer = document.createElement('div'),
+            modalOverlay = document.createElement('div'),
+            modalTitle = document.createElement('p'),
+            modalContent = document.createElement('div'),
+            modalDataList = document.createElement('ul'),
+            modalButtonArea = document.createElement('div');
+        // add class to the generated modal
+        modalContainer.className = 'p-modal p-modal--active';
+        modalOverlay.className = 'p-modal__background';
+        modalContent.className = 'p-modal__contents';
+        modalTitle.className = 'p-modal__title';
+        modalDataList.className = 'p-modal__list';
+        modalButtonArea.className = 'p-modal__buttonArea';
+        // add event to background to close/delete modal
+        modalOverlay.addEventListener('click', (e) => {
+            closeModal(modalContainer);
+        });
+        // add data to the created placeholder title, etc....
+        modalTitle.innerText = this.title;
+        // append children to parent  
+        modalContainer.append(modalOverlay);
+        modalContainer.append(modalContent);
+        modalContent.append(modalTitle);
+        if (!this.isSuccess && !this.isError) {
+            modalDataList.innerHTML = insertInputData();
+            modalContent.append(modalDataList);
+        }
+        // prepare buttons
+        preparedModalButtons(modalContainer, modalButtonArea);
+        modalContent.appendChild(modalButtonArea);
+        // inject modal to body tag
+        document.body.appendChild(modalContainer);
     }
-    info() {
-        console.log([this, this.getInputInformation()]);
+    insertInputData = () => {
+        let html = '';
+        let _el = this.modalData;
+        for (let i = 0; i < _el.length; i++) {
+            let v = _el[i].element.value;
+            let l = cleanString(_el[i].label);
+            if (v) {
+                html += `<li class=p-modal__list__item><span class=label id=label_${_el[i].id}> ${l} </span><p class=data id=data_${_el[i].id}> ${v} </p></li>`;
+            }
+        }
+        return html;
+    }
 
+    preparedModalButtons = (modalContainer, buttonArea) => {
+        let buttonCancel = document.createElement('button');
+        let buttonSubmit = document.createElement('button');
+        buttonCancel.className = 'p-modal__button p-modal__button--l p-modal__button--main p-modal__button--cancel';
+        buttonSubmit.className = 'p-modal__button p-modal__button--l p-modal__button--accent p-modal__button--submit';
+        buttonCancel.innerText = 'Cancel';
+        buttonSubmit.innerText = 'Submit';
+        buttonArea.appendChild(buttonCancel);
+        buttonArea.appendChild(buttonSubmit);
+        //event
+        buttonCancel.addEventListener('click', function (e) {
+            closeModal(modalContainer);
+        });
+        buttonSubmit.addEventListener('click', function (e) {
+            let _form = $(getTargetElement());
+            let _formData = new FormData(_form[0]);
+            $.ajax({
+                type: _form.attr('method'),
+                url: _form.attr('action'),
+                processData: false,
+                contentType: false,
+                data: _formData,
+                // dataType: 'json',
+                success: function (response) {
+                    let parsedResponse = JSON.parse(response);
+                    _this.isResponse = parsedResponse;
+                    _this.targetElement.setAttribute('form-Modal-Trigger', 'true');
+                },
+            });
+        });
+    }
+    watchChanges = () => {
+        var observer = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+                if (mutation.type === "attributes") {
+                    // if form is submitted 
+                    closeModal(document.querySelector('.p-modal'));
+                    if ('success' in getResponse()) {
+                        _this.isSuccess = true;
+                    } else if ('error' in getResponse()) {
+                        _this.isError = true;
+                    }else{
+                        _this.isSuccess = false;
+                        _this.isError = false;
+                    }
+                }
+            });
+        });
+        observer.observe(this.targetElement, {
+            attributes: true,
+            attributeFilter: ['form-Modal-Trigger'],
+        });
+    }
+    /**
+     * function
+     */
+    const closeModal = (x) => {
+        return x.remove();
+    }
+    const cleanString = (x) => {
+        return x.replace(/[^\w ]/g, '');
     }
 }

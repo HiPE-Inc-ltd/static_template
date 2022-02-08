@@ -5,6 +5,30 @@
   &--hidden {
     opacity: 0;
   }
+  &--displayNone {
+    display: none;
+  }
+}
+.c-file01 {
+  position: relative;
+  color: $color-text-default;
+  &__label {
+    font-weight: 700;
+    letter-spacing: 1.12px;
+  }
+  &__button {
+    input[type='file'] {
+      display: none;
+    }
+  }
+  &__indicator {
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+  }
 }
 .c-text01 {
   width: 100%;
