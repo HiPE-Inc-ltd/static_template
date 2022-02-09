@@ -433,7 +433,7 @@ EXTRA
     <div class="l-row l-row--wrap partslist__inner u-mb-30">
         <div class="u-col-l-5  u-col-responsive-12">
             <div class="c-file01" id="test_fileUpload">
-                <label class="c-file01__label">Updated Resume (.pdf only)<span>*</span></label><br>
+                <label class="c-file01__label">Updated Resume (.pdf only)<span>*</span></label>
                 <label class="c-file01__button c-button c-button--l c-button--sub c-button--smoothCorner c-button--nobullet">
                     <input type="file" name="resumeFile" id="resumeFile">
                     <i class="fa fa-cloud-upload"></i> Choose File
@@ -478,7 +478,7 @@ EXTRA
     </p>
     <div class="l-row l-row--wrap partslist__inner u-mb-30">
         <div class="u-col-l-5  u-col-responsive-12">
-            <form class="p-form" method="post" action="<?= callScript('contact') ?>" enctype="multipart/form-data" id="test_formModal" form-Modal-Trigger="false" form-Modal="true" form-Modal-Role="confirmation" form-Title="Please Confirm Data Inputted!">
+            <form class="p-form" method="post" action="<?= callScript('contact') ?>" enctype="multipart/form-data" id="test_formModal" form-modal-trigger="false" form-modal="true" form-modal-role="confirmation" form-title="Please Confirm Data Inputted!" form-title-success="Send Successfully" form-title-error="Something went wrong!">
                 <label class="c-label01 c-label01--displayNone" for="hidden_id">Job ID</label>
                 <input type="hidden" class="c-text01" id="hidden_id" name="hidden_id" value="J001">
                 <div class="p-form__container">
@@ -528,7 +528,61 @@ EXTRA
         </div>
         <div class="u-col-l-6  u-col-responsive-12">
             <pre>
-<?= trim(htmlspecialchars('')) ?>
+<?= trim(htmlspecialchars('<form class="p-form" method="post" action="<?= callScript("contact") ?>" 
+            enctype="multipart/form-data" id="test_formModal" form-modal-trigger="false" form-modal="true" form-modal-role="confirmation" 
+            form-title="Please Confirm Data Inputted!" form-title-success="Send Successfully" form-title-error="Something went wrong!">
+                <label class="c-label01 c-label01--displayNone" for="hidden_id">Job ID</label>
+                <input type="hidden" class="c-text01" id="hidden_id" name="hidden_id" value="J001">
+                <div class="p-form__container">
+                    <label class="c-label01" for="company">Company Name</label>
+                    <input type="text" class="c-text01" id="company" name="company" placeholder="ex. Hipe">
+                </div>
+                <div class="p-form__group">
+                    <div class="p-form__container">
+                        <label class="c-label01" for="first_name">First Name</label>
+                        <input type="text" class="c-text01" id="first_name" name="first_name" placeholder="ex. John">
+                    </div>
+                    <div class="p-form__container">
+                        <label class="c-label01" for="last_name">Last Name</label>
+                        <input type="text" class="c-text01" id="last_name" name="last_name" placeholder="ex. doe">
+                    </div>
+                </div>
+                <div class="p-form__group">
+                    <div class="p-form__container">
+                        <label class="c-label01" for="email">Email</label>
+                        <input type="email" class="c-text01" id="email" name="email" placeholder="ex. example@gmail.com">
+                    </div>
+                    <div class="p-form__container">
+                        <label class="c-label01" for="emailConfirm">Confirm Email</label>
+                        <input type="email" class="c-text01" id="emailConfirm" name="emailConfirm" placeholder="ex. example@gmail.com">
+                    </div>
+                </div>
+                <div class="p-form__container">
+                    <label class="c-label01" for="message">Message</label>
+                    <textarea class="c-textarea01" id="message" cols="30" rows="10" name="message" placeholder="ex. I would like to inquire....."></textarea>
+                </div>
+                <div class="p-form__container">
+                    <div class="c-file01" id="test_fileUpload_modal">
+                        <label class="c-file01__label" for="resumeFile">Updated Resume (.pdf only)<span>*</span></label><br>
+                        <label class="c-file01__button c-button c-button--l c-button--sub c-button--smoothCorner c-button--nobullet">
+                            <input type="file" name="resumeFile" id="resumeFile">
+                            <i class="fa fa-cloud-upload"></i> Choose File
+                        </label>
+                        <p class="c-file01__indicator">No file chosen...</p>
+                    </div>
+                </div>
+                <div class="p-form__group p-form__group--buttonArea">
+                    <button class="c-button c-button--l c-button--main">
+                        Submit
+                    </button>
+                </div>
+            </form>')) ?>
+            </pre>
+            <pre>
+<?= trim(htmlspecialchars("document.addEventListener('DOMContentLoaded', function () {
+    let dummyForm = new FormModal('#test_formModal');
+    dummyForm.mount();
+    });")) ?>
             </pre>
         </div>
     </div>

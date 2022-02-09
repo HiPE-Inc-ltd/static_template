@@ -32,6 +32,9 @@
     color: $color-accent;
     margin-bottom: 1rem;
   }
+  &__check {
+    text-align: center;
+  }
   &__contents {
     background: #fff;
     margin: 0 auto;
@@ -81,6 +84,7 @@
     cursor: pointer;
     transition: all 0.3s ease-out;
     box-shadow: 15px 15px 30px #0000002c;
+    margin: auto;
     &:after {
       content: '';
       position: absolute;
