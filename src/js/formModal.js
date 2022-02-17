@@ -2,21 +2,25 @@ function FormModal(form = 'form') {
     var _this = this;
     this.targetName = form;
     this.targetElement = document.querySelector(this.targetName);
-    this.isActive = this.targetElement.hasAttribute('form-modal') ? this.targetElement.getAttribute('form-modal') : 'true';
-    this.isTriggered = this.targetElement.hasAttribute('form-modal-trigger') ? this.targetElement.getAttribute('form-modal-trigger') : 'false';
-    this.title = this.targetElement.hasAttribute('form-title') ? this.targetElement.getAttribute('form-title') : 'Default Title';
-    this.titleSuccess = this.targetElement.hasAttribute('form-title-success') ? this.targetElement.getAttribute('form-title-success') : 'Default Title Success';
-    this.titleError = this.targetElement.hasAttribute('form-title-error') ? this.targetElement.getAttribute('form-title-error') : 'Default Title Error';
-    this.role = this.targetElement.hasAttribute('form-Modal-Role') ? this.targetElement.getAttribute('form-Modal-Role') : 'Confirmation';
-    this.confirmButton = null;
-    this.isSuccess = false;
-    this.isError = false;
-    this.isResponse = {};
-    this.modalData = [];
+    if (this.targetElement) {
+        this.isActive = this.targetElement.hasAttribute('form-modal') ? this.targetElement.getAttribute('form-modal') : 'true';
+        this.isTriggered = this.targetElement.hasAttribute('form-modal-trigger') ? this.targetElement.getAttribute('form-modal-trigger') : 'false';
+        this.title = this.targetElement.hasAttribute('form-title') ? this.targetElement.getAttribute('form-title') : 'Default Title';
+        this.titleSuccess = this.targetElement.hasAttribute('form-title-success') ? this.targetElement.getAttribute('form-title-success') : 'Default Title Success';
+        this.titleError = this.targetElement.hasAttribute('form-title-error') ? this.targetElement.getAttribute('form-title-error') : 'Default Title Error';
+        this.role = this.targetElement.hasAttribute('form-Modal-Role') ? this.targetElement.getAttribute('form-Modal-Role') : 'Confirmation';
+        this.confirmButton = null;
+        this.isSuccess = false;
+        this.isError = false;
+        this.isResponse = {};
+        this.modalData = [];
+    }
 
     this.mount = () => {
-        initialize();
-        watchChanges();
+        if (this.isActive === 'true') {
+            initialize();
+            watchChanges();
+        }
     }
     /**
      * Setter
@@ -57,8 +61,10 @@ function FormModal(form = 'form') {
                     }
                 });
                 _this.confirmButton = element;
+            } else if (element.tagName === 'INPUT' && element.type == 'hidden') {
+                continue;
             } else {
-                let searchLabel = cleanString(document.querySelector(`label[for=${element.id}]`).textContent);
+                let searchLabel = element.labels != null ? cleanString(document.querySelector(`label[for=${element.id}]`).textContent) : '';
                 _this.modalData.push({
                     element: element,
                     id: element.id,
@@ -89,7 +95,7 @@ function FormModal(form = 'form') {
         modalOverlay.addEventListener('click', (e) => {
             closeModal(modalContainer, true);
         });
-        // append children to parent  
+        // append children to parent
         modalContainer.append(modalOverlay);
         modalContainer.append(modalContent);
         modalContent.append(modalTitle);
@@ -151,18 +157,37 @@ function FormModal(form = 'form') {
             e.preventDefault();
             let _form = $(getTargetElement());
             let _formData = new FormData(_form[0]);
+            let _loader = document.createElement('div');
+            _loader.className = 'c-loader';
             $.ajax({
                 type: _form.attr('method'),
                 url: _form.attr('action'),
                 processData: false,
                 contentType: false,
                 data: _formData,
-                // dataType: 'json',
+                beforeSend: function () {
+                    document.querySelector('.p-modal--active .p-modal__contents').appendChild(_loader);
+                },
                 success: function (response) {
-                    let parsedResponse = JSON.parse(response);
+                    let parsedResponse;
+                    try {
+                        parsedResponse = JSON.parse(response);
+                    } catch (e) {
+                        parsedResponse = response;
+                    }
                     _this.isResponse = parsedResponse;
                     _this.isTriggered = "true";
                     _this.targetElement.setAttribute('form-modal-trigger', getIsTriggered());
+                    getTargetElement().reset(); // remove form input data
+                },
+                error: function ($xhr, XMLHttpRequest, textStatus, errorThrown) {
+                    var string = $xhr.responseJSON;
+                    _this.isResponse = string;
+                    _this.isTriggered = "true";
+                    _this.targetElement.setAttribute('form-modal-trigger', getIsTriggered());
+                },
+                complete: function () {
+                    _loader.remove();
                 },
             });
         });
@@ -177,7 +202,7 @@ function FormModal(form = 'form') {
         var observer = new MutationObserver(function (mutations) {
             mutations.forEach(function (mutation) {
                 if (mutation.type === "attributes") {
-                    // if form is submitted 
+                    // if form is submitted
                     if ('success' in getResponse()) {
                         _this.isSuccess = true;
                         _this.isError = false;
