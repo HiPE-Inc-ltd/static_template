@@ -147,18 +147,43 @@ function initImageSliderComparisons() {
     /* ind all elements with an "frame" class in p-imageCompare */
     var frame = document.querySelectorAll('.p-imageCompare__frame');
     frame.forEach(element => {
-        let dimensionH = element.parentElement.parentElement.getBoundingClientRect().height;
-        let dimensionW = element.parentElement.parentElement.getBoundingClientRect().width;
-        let src = element.querySelector('img').getAttribute('src');
-        css(element, {
+        injectFrameBackground(element);
+    });
+    window.onresize = resizeFrame;
+
+    function resizeFrame() {
+        frame.forEach(e => {
+            css(e, {
+                "height": `${frameDimension(e)[0]}px`,
+                "width": `${frameDimension(e)[1]}px`,
+            });
+        });
+    }
+
+    function injectFrameBackground(e) {
+        let src = frameSrc(e);
+        let h = frameDimension(e)[0];
+        let w = frameDimension(e)[1];
+        css(e, {
             "background-image": `url('${src}')`,
             "background-repeat": "no-repeat",
             "background-position": "center",
             "background-size": "cover",
-            "height": `${dimensionH}px`,
-            "width": `${dimensionW}px`,
+            "height": `${h}px`,
+            "width": `${w}px`,
         });
-    });
+    }
+
+    function frameSrc(e) {
+        return e.querySelector('img').getAttribute('src');
+    }
+
+    function frameDimension(e) {
+        let dimensionH = e.parentElement.parentElement.getBoundingClientRect().height;
+        let dimensionW = e.parentElement.parentElement.getBoundingClientRect().width;
+        return [dimensionH, dimensionW];
+    }
+
     var x, i;
     /* Find all elements with an "overlay" class: */
     x = document.getElementsByClassName("p-imageCompare__overlayImage");
