@@ -10,4 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
     btnShowMenu.addEventListener("click", (e) => {
         btnShowMenu.parentElement.classList.toggle('isOpen');
     });
+    let fileUpload = new FileUpload('#test_fileUpload');
+    fileUpload.watch();
+    let fileUpload2 = new FileUpload('#test_fileUpload_modal');
+    fileUpload2.watch();
+    let dummyForm = new FormModal('#test_formModal');
+    dummyForm.mount();
 });

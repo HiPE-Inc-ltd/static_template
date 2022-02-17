@@ -172,7 +172,7 @@ function mapGlyphs(glyph) {
 
 function minify_js() {
     return src(SRC_JS_PATH)
-        .pipe(terser())
+        // .pipe(terser())
         .pipe(concat('all.js'))
         .pipe(size({
             showFiles: true

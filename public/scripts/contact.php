@@ -3,9 +3,10 @@ include_once(dirname(__DIR__, 2) . '/app/functions.php');
 function execRule($rule, $valueToBeChecked)
 {
     $error = [
-        'require' => '必須項目です',
-        'email' => '',
-        'same' => 'メールアドレスが一致しません',
+        'require' => 'Input is required.',
+        'email' => 'Correct format required.',
+        'same' => 'Input must match',
+        'file' => 'Check uploaded file',
         'default' => 'no error'
     ];
     $result = [false, $error['default']];
@@ -17,6 +18,12 @@ function execRule($rule, $valueToBeChecked)
                     if (strcmp($valueToBeChecked, $_POST[$parseRule[1]]) != 0) {
                         $result = [true, $error['same']];
                     }
+                }
+                break;
+            case 'file':
+                $search = $parseRule[1];
+                if (!preg_match("/{$search}/i", $valueToBeChecked)) {
+                    $result = [true, $error['file']];
                 }
                 break;
         }
@@ -38,41 +45,68 @@ function execRule($rule, $valueToBeChecked)
 function execValidate($validationRuleSet)
 {
     $failedValidateList = [];
-    foreach ($_POST as $rawInputField => $inputValue) {
-        foreach ($validationRuleSet as $inputField => $ruleSet) {
-            if ($rawInputField === $inputField) {
-                foreach ($ruleSet as $rule) {
-                    $checkedResult = execRule($rule, $inputValue);
-                    if ($checkedResult[0]) {
-                        $failedValidateList['field_error'][$rawInputField][$rule]['is_error'] =  $checkedResult[0];
-                        $failedValidateList['field_error'][$rawInputField][$rule]['message'] =  $checkedResult[1];
+    if (!empty($validationRuleSet['post'])) {
+        foreach ($_POST as $rawInputField => $inputValue) {
+            foreach ($validationRuleSet['post'] as $inputField => $ruleSet) {
+                if ($rawInputField === $inputField) {
+                    foreach ($ruleSet as $rule) {
+                        $checkedResult = execRule($rule, $inputValue);
+                        if ($checkedResult[0]) {
+                            $failedValidateList['error']['field'][$rawInputField][$rule]['is_error'] =  $checkedResult[0];
+                            $failedValidateList['error']['field'][$rawInputField][$rule]['message'] =  $checkedResult[1];
+                        }
                     }
                 }
             }
         }
+    }
+    if (!empty($validationRuleSet['files'])) {
+        foreach ($_FILES as $fileName => $fileDetails) {
+            foreach ($validationRuleSet['files'] as $inputField => $ruleSet) {
+                if ($fileName == $inputField) {
+                    foreach ($ruleSet as $rule) {
+                        $checkedResult = execRule($rule, $fileDetails['type']);
+                        if ($checkedResult[0]) {
+                            $failedValidateList['error']['field'][$fileName][$rule]['is_error'] =  $checkedResult[0];
+                            $failedValidateList['error']['field'][$fileName][$rule]['message'] =  $checkedResult[1];
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (!empty($failedValidateList)) {
+        $failedValidateList['error']['message'] = 'failed';
     }
     return $failedValidateList;
 }
 function validateForm()
 {
     $validateSet = [
-        'surname' => ['require'],
-        'name' => ['require'],
-        'email' => ['email', 'require'],
-        'emailConfirm' => ['email', 'require', 'same:email'],
-        'message' => ['require'],
+        'post' => [
+            'hidden_id' => ['required'],
+            'company' => ['require'],
+            'first_name' => ['require'],
+            'last_name' => ['require'],
+            'email' => ['email', 'require'],
+            'emailConfirm' => ['email', 'require', 'same:email'],
+            'message' => ['require'],
+        ],
+        'files' => [
+            'resumeFile' => ['file:pdf'],
+        ],
     ];
     $validate = execValidate($validateSet);
     if (empty($validate)) {
         session_start();
         $_SESSION['validated_field'] = $_POST;
         $url = getServerProtocol() . getHost() . '/page-confirmation';
-        return json_encode(['redirect' => $url]);
+        return json_encode(['success' => ['message' => 'Success', 'url' => $url]]);
     } else {
         return json_encode($validate);
     }
 }
 
-if (!empty($_POST)) {
+if (isset($_POST) && isset($_FILES)) {
     echo validateForm();
 }

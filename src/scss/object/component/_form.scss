@@ -1,18 +1,83 @@
-.c-text01 {
+.c-label01 {
+  font-weight: bold;
+  color: $color-text01;
+  @include font-line(18, 36);
+  &--hidden {
+    opacity: 0;
+  }
+  &--displayNone {
+    display: none;
+  }
+  &--require {
+    span {
+      color: $color-required;
+    }
+  }
+  &--optional {
+    span {
+      color: $color-optional;
+    }
+  }
+}
+.c-file01 {
+  position: relative;
+  color: $color-text01;
+  padding-bottom: 25px;
+  &--error {
+    border: 2px solid $color-error;
+  }
+  &__label {
+    font-weight: 700;
+    @include font-line(18, 25);
+  }
+  &__button {
+    input[type='file'] {
+      display: none;
+    }
+  }
+  &__indicator {
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+  }
+}
+.c-text01,
+.c-textarea01,
+.c-date01 {
+  font-family: $font-family-base;
+  color: $color-text-default;
+  font-weight: bold;
+  border: 1px solid #000;
+  position: relative;
+  background: #ffffff;
+  @include font-line(16);
+  @include is-responsive {
+    @include font-line(15);
+  }
+  &::placeholder {
+    font-weight: bold;
+    letter-spacing: 0.08em;
+  }
+  &--hidden {
+    visibility: hidden;
+    position: absolute;
+  }
+  &--readonly {
+    background-color: rgb(184, 184, 184);
+  }
+}
+.c-text01,
+.c-date01 {
   width: 100%;
   padding: 18px 16px;
-  border: 1px solid #000;
-  background: #ffffff;
-  color: $color-sub;
-  font-family: $font-family-base;
   @include is-responsive {
     height: 56px;
-    @include font-line(16, 28);
   }
   @include is-laptop {
     height: 56px;
-    @include font-line(14, 14);
-    letter-spacing: 2.1px;
   }
   &:focus {
     border-color: $color-accent;
@@ -27,19 +92,11 @@
 .c-textarea01 {
   padding: 24px;
   width: 100%;
-  border: 1px solid #000;
-  background: #ffffff;
-  color: $color-sub;
-  font-family: $font-family-base;
-  font-weight: normal;
   @include is-responsive {
     height: 100px;
-    @include font-line(16, 24);
   }
   @include is-laptop {
     height: 240px;
-    letter-spacing: 2.1px;
-    @include font-line(14);
   }
   &:focus {
     border-color: $color-accent;
@@ -55,7 +112,7 @@
   padding: 5px 10px;
   border: solid 1px #000;
   width: 100%;
-  background: #fff url(../../../src/icons/select_arrow.svg) no-repeat;
+  background: #fff url('../tiny/icon/bg_form_select_01.svg') no-repeat;
   background-position: right 14px center;
   background-size: 16px 8px;
   height: 50px;
