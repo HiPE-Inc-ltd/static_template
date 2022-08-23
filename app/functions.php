@@ -67,33 +67,56 @@ function console_log($data = null)
 {
     return '<script> console.log(' . json_encode($data) . ')</script>';
 }
-function resource($type = null, $file = null)
+function getResourceBase($type)
 {
-    $path = isLocalEnvironment() ? '' : getServerProtocol() . getHost();
     switch ($type) {
         case 'css':
-            $path .= CSS . $file;
+            return CSS;
             break;
         case 'js':
-            $path .= JS . $file;
+            return JS;
             break;
         case 'img':
-            $path .= IMG . $file;
+            return IMG;
             break;
         case 'media':
-            $path .= MEDIA . $file;
+            return MEDIA;
             break;
         case 'iconfont':
-            $path .= ICONFONT . $file;
+            return ICONFONT;
             break;
         case 'vendor':
-            $path .= VENDOR . $file;
+            return VENDOR;
             break;
         default:
             return '';
             break;
     }
-    return $path;
+}
+function resource($type = null, $file = null, $fileModified = false)
+{
+    $hostPath = isLocalEnvironment() ? '' : getServerProtocol() . getHost();
+    $resourcePath = getResourceBase($type) . $file;
+    $returnPath = '';
+    $version = 0;
+    if ($fileModified) {
+        switch ($type) {
+            case 'css':
+            case 'js':
+            case 'iconfont':
+                if (file_exists(__ROOT__ . $resourcePath)) {
+                    $version = date("YmdHis", filemtime(__ROOT__ . $resourcePath));
+                }
+                $returnPath =  $hostPath . $resourcePath . '?v=' . $version;
+                break;
+            default:
+                $returnPath = $hostPath . $resourcePath;
+                break;
+        }
+    } else {
+        $returnPath = $hostPath . $resourcePath;
+    }
+    return $returnPath;
 }
 function resources($type = null, $files = [], $fileModified = false)
 {
@@ -103,27 +126,26 @@ function resources($type = null, $files = [], $fileModified = false)
         switch ($type) {
             case 'css':
                 $format = '<link rel="stylesheet" href="%s"/>';
-                $resourcesBasePath = CSS;
                 break;
             case 'js':
                 $format = '<script type="text/javascript" src="%s"></script>';
-                $resourcesBasePath = JS;
                 break;
         }
         foreach ($files as $file) {
-            $fullPath = $temp = $resourcesBasePath . $file;
+            $fullPath = $temp = getResourceBase($type) . $file;
             $version = 0;
             if ($fileModified && file_exists(__ROOT__ . $temp)) {
-                $version =  date("YmdHis", filemtime(__ROOT__ . $temp));
+                $version = date("YmdHis", filemtime(__ROOT__ . $temp));
             }
             $fullPath = $hostPath . $temp . '?v=' . $version;
             $html .= sprintf($format, $fullPath);
         }
-        return $html;
+        return $html . PHP_EOL;
     } else {
         throw new Exception('Files required array as parameter.' . PHP_EOL);
     }
 }
+
 function callScript($fileName, $extension = 'php')
 {
     $hostPath = isLocalEnvironment() ? '' : getServerProtocol() . getHost();
