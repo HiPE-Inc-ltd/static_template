@@ -1,5 +1,5 @@
 <?php
-require('app/functions.php');
+require_once('app/functions.php');
 includeWithVariables('includes/header.php', ['pageTitle' => 'partslist', 'headCSS' => ['page/partslist.css']]) ?>
 <section class="l-wrap partslist">
     <ul class="partslist__floatMenu">

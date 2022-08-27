@@ -88,18 +88,21 @@ function getResourceBase($type)
         case 'vendor':
             return VENDOR;
             break;
+        case 'favicon':
+            return FAVICON;
+            break;
         default:
             return '';
             break;
     }
 }
-function resource($type = null, $file = null, $fileModified = false)
+function resource($type = null, $file = null, $cacheBusting = false)
 {
     $hostPath = isLocalEnvironment() ? '' : getServerProtocol() . getHost();
     $resourcePath = getResourceBase($type) . $file;
     $returnPath = '';
     $version = 0;
-    if ($fileModified) {
+    if ($cacheBusting) {
         switch ($type) {
             case 'css':
             case 'js':
@@ -118,7 +121,7 @@ function resource($type = null, $file = null, $fileModified = false)
     }
     return $returnPath;
 }
-function resources($type = null, $files = [], $fileModified = false)
+function resources($type = null, $files = [], $cacheBusting = false)
 {
     $hostPath = isLocalEnvironment() ? '' : getServerProtocol() . getHost();
     $html = '';
@@ -134,7 +137,7 @@ function resources($type = null, $files = [], $fileModified = false)
         foreach ($files as $file) {
             $fullPath = $temp = getResourceBase($type) . $file;
             $version = 0;
-            if ($fileModified && file_exists(__ROOT__ . $temp)) {
+            if ($cacheBusting && file_exists(__ROOT__ . $temp)) {
                 $version = date("YmdHis", filemtime(__ROOT__ . $temp));
             }
             $fullPath = $hostPath . $temp . '?v=' . $version;

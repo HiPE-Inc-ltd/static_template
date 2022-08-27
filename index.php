@@ -1,5 +1,5 @@
 <?php
-require('app/functions.php');
+require_once('app/functions.php');
 includeWithVariables('includes/header.php', ['pageTitle' => 'index', 'headCSS' => ['page/top.css']]) ?>
 <section class="introduction">
 </section>

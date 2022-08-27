@@ -7,3 +7,4 @@ define('MEDIA', '/public/release/media');
 define('ICONFONT', '/public/release/mini/font/');
 define('VENDOR', '/public/vendor/gulp/');
 define('SCRIPT', '/public/scripts/');
+define('FAVICON', '/public/release/favicon/');
